@@ -81,7 +81,7 @@ app.post('/joinLecture', async (req, res) => {
     const { ogrenciNo, yoklamaKodu } = req.body;
     const name = 'derseKatil';
     const data = `------WebKitFormBoundary7NrnXUIBOJHGGJWo\r\nContent-Disposition: form-data; name="ogrenciNo"\r\n\r\n${ogrenciNo}\r\n------WebKitFormBoundary7NrnXUIBOJHGGJWo\r\nContent-Disposition: form-data; name="yoklamaKodu"\r\n\r\n${yoklamaKodu}\r\n------WebKitFormBoundary7NrnXUIBOJHGGJWo\r\nContent-Disposition: form-data; name="name"\r\n\r\n${name}\r\n------WebKitFormBoundary7NrnXUIBOJHGGJWo\r\nContent-Disposition: form-data; name="getKod"\r\n\r\n\r\n------WebKitFormBoundary7NrnXUIBOJHGGJWo--\r\n`;
-    console.log(data);
+
     const config = {
         method: 'post',
         url: 'https://pdks.nisantasi.edu.tr/ogrenci/giris-islem',

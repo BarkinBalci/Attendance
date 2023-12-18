@@ -133,7 +133,7 @@
       if (uzunluk >= 11) {
         $.ajax({
           type: "POST",
-          url: "http://localhost:3000/studentNumber",
+          url: 'http://localhost:3000/studentNumber',
           dataType: 'json',
           contentType: 'application/json',
           data: JSON.stringify({
@@ -161,7 +161,7 @@
       if (uzunluk == 7) {
         $.ajax({
           type: "POST",
-          url: "http://localhost:3000/lectureInfo",
+          url: 'http://localhost:3000/lectureInfo',
           dataType: 'json',
           contentType: 'application/json',
           data: JSON.stringify({
@@ -193,8 +193,6 @@
 
         if (checkbox.is(':checked')) {
           var studentNumber = checkbox.val();
-          console.log(studentNumber);
-          console.log($(".yoklamaKodu").val());
           $.ajax({
             url: 'http://localhost:3000/joinLecture',
             type: 'POST',
