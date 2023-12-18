@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 app.use(express.static('public'));
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
+    res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 
 app.post('/studentNumber', async (req, res) => {
@@ -122,6 +122,18 @@ app.post('/joinLecture', async (req, res) => {
     }
 });
 
+app.post('/QR', async (req, res) => {
+    const url = req.body.url;
+    try {
+        const response = await axios.get(url);
+        const $ = cheerio.load(response.data);
+        const selectedElement = $('select[name="yoklamaDers"]').html();
+        res.send(selectedElement);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('An error occurred while making the request.');
+    }
+});
 app.listen(3000, () => {
     console.log('Server is running on port 3000');
 });
