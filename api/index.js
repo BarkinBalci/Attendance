@@ -14,7 +14,9 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-app.post('/studentNumber', async (req, res) => {
+const apiRouter = app.route('/api');
+
+apiRouter.post('/studentNumber', async (req, res) => {
     const { name, ogrenciNo } = req.body;
     const data = `name=${name}&ogrenciNo=${ogrenciNo}`;
     const config = {
@@ -46,7 +48,7 @@ app.post('/studentNumber', async (req, res) => {
     }
 });
 
-app.post('/lectureInfo', async (req, res) => {
+apiRouter.post('/lectureInfo', async (req, res) => {
     const { name, yoklamaKodu } = req.body;
     const data = `name=${name}&yoklamaKodu=${yoklamaKodu}`;
     const config = {
@@ -77,7 +79,7 @@ app.post('/lectureInfo', async (req, res) => {
     }
 });
 
-app.post('/joinLecture', async (req, res) => {
+apiRouter.post('/joinLecture', async (req, res) => {
     const { ogrenciNo, yoklamaKodu, getKod } = req.body;
     const name = 'derseKatil';
     const data = `------WebKitFormBoundary7NrnXUIBOJHGGJWo\r\nContent-Disposition: form-data; name="ogrenciNo"\r\n\r\n${ogrenciNo}\r\n------WebKitFormBoundary7NrnXUIBOJHGGJWo\r\nContent-Disposition: form-data; name="yoklamaKodu"\r\n\r\n${yoklamaKodu}\r\n------WebKitFormBoundary7NrnXUIBOJHGGJWo\r\nContent-Disposition: form-data; name="name"\r\n\r\n${name}\r\n------WebKitFormBoundary7NrnXUIBOJHGGJWo\r\nContent-Disposition: form-data; name="getKod"\r\n\r\n${getKod}\r\n------WebKitFormBoundary7NrnXUIBOJHGGJWo--\r\n`;
