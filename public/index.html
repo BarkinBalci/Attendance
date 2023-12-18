@@ -85,14 +85,14 @@
                 oninput="dersBilgiGetir(this.value); toggleInput('yoklamaKodu', 'qrLink');">
             </div>
             <div class="col-12 mt-4">
-              <label class="fw-semibold">Ders QR Link</label>
+              <label class="fw-semibold">Ders QR Link - Çalışmıyor</label>
               <input id="qrLink" class="form-control qrLink" type="text" name="qrLink" placeholder=""
                 oninput="toggleInput('yoklamaKodu', 'qrLink');">
             </div>
             <div class="col-12 mt-3 dersBilgi">
               <label class="fw-semibold">Ders</label>
 
-              <select id="yoklamaSelection" class="form-control" name="yoklamaDers" disabled>
+              <select id="yoklamaSelection" class="form-control" name="yoklamaDers">
                 <option value="">Seçiniz...</option>
               </select>
             </div>
@@ -162,7 +162,6 @@
             ogrenciNo: ogrenciNo
           }),
           beforeSend: function (response) {
-            $(".loader").toggleClass("d-none");
           },
           success: function (response) {
             $(".ogrenciBilgi").empty();
@@ -170,7 +169,6 @@
               $(".ogrenciBilgi").append(response.icerik);
             }
 
-            $(".loader").toggleClass("d-none");
           }
         });
       }
@@ -190,15 +188,12 @@
             yoklamaKodu: yoklamaKodu
           }),
           beforeSend: function (response) {
-            $(".loader").toggleClass("d-none");
           },
           success: function (response) {
             $(".dersBilgi").empty();
             if (response.icerik) {
               $(".dersBilgi").append(response.icerik);
             }
-
-            $(".loader").toggleClass("d-none");
           }
         });
       }
