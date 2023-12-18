@@ -78,32 +78,36 @@ app.post('/lectureInfo', async (req, res) => {
 });
 
 app.post('/joinLecture', async (req, res) => {
-    const {ogrenciNo, yoklamaKodu, getKod} = req.body;
+    const { ogrenciNo, yoklamaKodu } = req.body;
     const name = 'derseKatil';
-
-    const data = `------WebKitFormBoundarySa7hpD9z1SWcqKSg\r\nContent-Disposition: form-data; name="ogrenciNo"\r\n\r\n${ogrenciNo}\r\n------WebKitFormBoundarySa7hpD9z1SWcqKSg\r\nContent-Disposition: form-data; name="yoklamaKodu"\r\n\r\n${yoklamaKodu}\r\n------WebKitFormBoundarySa7hpD9z1SWcqKSg\r\nContent-Disposition: form-data; name="name"\r\n\r\n${name}\r\n------WebKitFormBoundarySa7hpD9z1SWcqKSg\r\nContent-Disposition: form-data; name="getKod"\r\n\r\n${getKod}\r\n------WebKitFormBoundarySa7hpD9z1SWcqKSg--\r\n`;
+    const data = `------WebKitFormBoundary7NrnXUIBOJHGGJWo\r\nContent-Disposition: form-data; name="ogrenciNo"\r\n\r\n${ogrenciNo}\r\n------WebKitFormBoundary7NrnXUIBOJHGGJWo\r\nContent-Disposition: form-data; name="yoklamaKodu"\r\n\r\n${yoklamaKodu}\r\n------WebKitFormBoundary7NrnXUIBOJHGGJWo\r\nContent-Disposition: form-data; name="name"\r\n\r\n${name}\r\n------WebKitFormBoundary7NrnXUIBOJHGGJWo\r\nContent-Disposition: form-data; name="getKod"\r\n\r\n\r\n------WebKitFormBoundary7NrnXUIBOJHGGJWo--\r\n`;
+    console.log(data);
     const config = {
         method: 'post',
         url: 'https://pdks.nisantasi.edu.tr/ogrenci/giris-islem',
         headers: {
+            'authority': 'pdks.nisantasi.edu.tr',
             'accept': 'application/json, text/javascript, */*; q=0.01',
             'accept-language': 'en-US,en;q=0.9,tr-TR;q=0.8,tr;q=0.7',
             'cache-control': 'no-cache',
-            'content-type': 'multipart/form-data; boundary=----WebKitFormBoundarySa7hpD9z1SWcqKSg',
+            'content-type': 'multipart/form-data; boundary=----WebKitFormBoundary7NrnXUIBOJHGGJWo',
+            'cookie': 'cf_clearance=kS9lOXcoiXslIfDGBhk0p3apVZKRBX15eF5h3ERpXv8-1702900384-0-1-192d3871.3c15a399.89c61554-0.2.1702900384',
+            'dnt': '1',
+            'origin': 'https://pdks.nisantasi.edu.tr',
             'pragma': 'no-cache',
+            'referer': 'https://pdks.nisantasi.edu.tr/ogrenci/giris',
             'sec-ch-ua': '"Not_A Brand";v="8", "Chromium";v="120", "Google Chrome";v="120"',
             'sec-ch-ua-mobile': '?0',
             'sec-ch-ua-platform': '"Windows"',
             'sec-fetch-dest': 'empty',
             'sec-fetch-mode': 'cors',
             'sec-fetch-site': 'same-origin',
-            'x-requested-with': 'XMLHttpRequest',
-            'cookie': 'cf_clearance=dA5DJWjd6U5trFpQT87RRiB2N494.10iUQZAXqPiTqg-1702889088-0-1-192d3871.3c15a399.89c61554-0.2.1702889088',
-            'Referer': 'https://pdks.nisantasi.edu.tr/ogrenci/giris',
-            'Referrer-Policy': 'strict-origin-when-cross-origin'
+            'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+            'x-requested-with': 'XMLHttpRequest'
         },
         data: data
     };
+
     try {
         const response = await axios(config);
         const $ = cheerio.load(response.data.mesaj);
@@ -115,7 +119,6 @@ app.post('/joinLecture', async (req, res) => {
         res.status(500).send('An error occurred while making the request.');
     }
 });
-    
 
 app.listen(3000, () => {
     console.log('Server is running on port 3000');

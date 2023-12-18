@@ -61,7 +61,7 @@
                   { id: "student5", value: "20212022071", label: "Yusuf" },
                   { id: "student6", value: "20202022025", label: "Bora" },
                   { id: "student7", value: "20202022035", label: "Buğra" },
-                  { id: "student8", value: "20212022027", label: "Baran" },
+                  { id: "student8", value: "20202022027", label: "Baran" },
                   { id: "student9", value: "20232022062", label: "Ulaştı" },
                   { id: "student10", value: "20212022092", label: "İlker" }
                 ];
@@ -193,27 +193,24 @@
 
         if (checkbox.is(':checked')) {
           var studentNumber = checkbox.val();
-
-          var formData = new FormData();
-          formData.append("name", "derseKatil");
-          formData.append("getKod", "");
-          formData.append("studentNumber", studentNumber);
-
+          console.log(studentNumber);
+          console.log($(".yoklamaKodu").val());
           $.ajax({
-            type: "POST",
-            url: "http://localhost:3000/joinLecture",
-            dataType: 'json',
-            contentType: false,
-            processData: false,
-            data: formData,
-            beforeSend: function (xhr) {
-              $(".loader").toggleClass("d-none");
-            },
+            url: 'http://localhost:3000/joinLecture',
+            type: 'POST',
+            data: JSON.stringify({
+              ogrenciNo: studentNumber,
+              yoklamaKodu: $(".yoklamaKodu").val()
+            }),
+            contentType: 'application/json', // Add this line
             success: function (response) {
-              console.log('responseFor' + studentNumber, response);
               $('#responseFor' + studentNumber).text(JSON.stringify(response.header + ' ' + response.paragraph));
-              $(".loader").toggleClass("d-none");
               $('#responseFor' + studentNumber).removeAttr("hidden");
+              console.log(response);
+            },
+            error: function (error) {
+              // handle error
+              console.log(error);
             }
           });
         }
