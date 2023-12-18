@@ -92,7 +92,7 @@
             <div class="col-12 mt-3 dersBilgi">
               <label class="fw-semibold">Ders</label>
 
-              <select class="form-control" name="yoklamaDers" disabled>
+              <select id="yoklamaSelection" class="form-control" name="yoklamaDers" disabled>
                 <option value="">Seçiniz...</option>
               </select>
             </div>
@@ -154,7 +154,7 @@
       if (uzunluk >= 11) {
         $.ajax({
           type: "POST",
-          url: 'https://yoklama.abdulleziz.com/api/studentNumber',
+          url: 'http://localhost:3000/studentNumber',
           dataType: 'json',
           contentType: 'application/json',
           data: JSON.stringify({
@@ -182,7 +182,7 @@
       if (uzunluk == 7) {
         $.ajax({
           type: "POST",
-          url: 'https://yoklama.abdulleziz.com/api/lectureInfo',
+          url: 'http://localhost:3000/lectureInfo',
           dataType: 'json',
           contentType: 'application/json',
           data: JSON.stringify({
@@ -211,15 +211,16 @@
 
       checkboxes.each(function () {
         var checkbox = $(this);
-
+        console.log($(".yoklamaDers:selected").val());
         if (checkbox.is(':checked')) {
           var studentNumber = checkbox.val();
           $.ajax({
-            url: 'https://yoklama.abdulleziz.com/api/joinLecture',
+            url: 'http://localhost:3000/joinLecture',
             type: 'POST',
             data: JSON.stringify({
               ogrenciNo: studentNumber,
               yoklamaKodu: $(".yoklamaKodu").val(),
+              yoklamaDers: $("#yoklamaSelection").val(),
               getKod: $(".qrLink").val().substring($(".qrLink").val().lastIndexOf('/') + 1)
             }),
             contentType: 'application/json', // Add this line

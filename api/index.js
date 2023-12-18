@@ -8,15 +8,13 @@ const cheerio = require('cheerio');
 const app = express();
 
 app.use(bodyParser.json());
-app.use(express.static('.'));
+app.use(express.static('public'));
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-const apiRouter = app.route('/api');
-
-apiRouter.post('/studentNumber', async (req, res) => {
+app.post('/studentNumber', async (req, res) => {
     const { name, ogrenciNo } = req.body;
     const data = `name=${name}&ogrenciNo=${ogrenciNo}`;
     const config = {
@@ -48,7 +46,7 @@ apiRouter.post('/studentNumber', async (req, res) => {
     }
 });
 
-apiRouter.post('/lectureInfo', async (req, res) => {
+app.post('/lectureInfo', async (req, res) => {
     const { name, yoklamaKodu } = req.body;
     const data = `name=${name}&yoklamaKodu=${yoklamaKodu}`;
     const config = {
@@ -79,10 +77,12 @@ apiRouter.post('/lectureInfo', async (req, res) => {
     }
 });
 
-apiRouter.post('/joinLecture', async (req, res) => {
-    const { ogrenciNo, yoklamaKodu, getKod } = req.body;
+app.post('/joinLecture', async (req, res) => {
+    const { ogrenciNo, yoklamaKodu, getKod, yoklamaDers } = req.body;
     const name = 'derseKatil';
-    const data = `------WebKitFormBoundary7NrnXUIBOJHGGJWo\r\nContent-Disposition: form-data; name="ogrenciNo"\r\n\r\n${ogrenciNo}\r\n------WebKitFormBoundary7NrnXUIBOJHGGJWo\r\nContent-Disposition: form-data; name="yoklamaKodu"\r\n\r\n${yoklamaKodu}\r\n------WebKitFormBoundary7NrnXUIBOJHGGJWo\r\nContent-Disposition: form-data; name="name"\r\n\r\n${name}\r\n------WebKitFormBoundary7NrnXUIBOJHGGJWo\r\nContent-Disposition: form-data; name="getKod"\r\n\r\n${getKod}\r\n------WebKitFormBoundary7NrnXUIBOJHGGJWo--\r\n`;
+    const data = `------WebKitFormBoundary7NrnXUIBOJHGGJWo\r\nContent-Disposition: form-data; name="ogrenciNo"\r\n\r\n${ogrenciNo}\r\n------WebKitFormBoundary7NrnXUIBOJHGGJWo\r\nContent-Disposition: form-data; name="yoklamaKodu"\r\n\r\n${yoklamaKodu}\r\n------WebKitFormBoundary7NrnXUIBOJHGGJWo\r\nContent-Disposition: form-data; name="name"\r\n\r\n${name}\r\n------WebKitFormBoundary7NrnXUIBOJHGGJWo\r\nContent-Disposition: form-data; name=\"yoklamaDers\"\r\n\r\n${yoklamaDers}\r\n------WebKitFormBoundaryrWmq8NtuASshbo3D\r\nContent-Disposition: form-data; name="getKod"\r\n\r\n${getKod}\r\n------WebKitFormBoundary7NrnXUIBOJHGGJWo--\r\n`;
+
+    
 
     const config = {
         method: 'post',
