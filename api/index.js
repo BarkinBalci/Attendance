@@ -42,7 +42,10 @@ app.post("/api/studentNumber", async (req, res) => {
     res.json(response.data);
   } catch (error) {
     console.error(error);
-    res.status(500).send("An error occurred while making the request.");
+    res.status(500).send({
+      message: "An error occurred while making the request.",
+      error,
+    });
   }
 });
 
@@ -74,7 +77,10 @@ app.post("/api/lectureInfo", async (req, res) => {
     res.json(response.data);
   } catch (error) {
     console.error(error);
-    res.status(500).send("An error occurred while making the request.");
+    res.status(500).send({
+      message: "An error occurred while making the request.",
+      error,
+    });
   }
 });
 
@@ -121,7 +127,10 @@ app.post("/api/joinLecture", async (req, res) => {
     res.json({ header, paragraph });
   } catch (error) {
     console.error(error);
-    res.status(500).send("An error occurred while making the request.");
+    res.status(500).send({
+      message: "An error occurred while making the request.",
+      error,
+    });
   }
 });
 
@@ -134,7 +143,10 @@ app.post("/api/QR", async (req, res) => {
     res.send(selectedElement);
   } catch (error) {
     console.error(error);
-    res.status(500).send("An error occurred while making the request.");
+    res.status(500).send({
+      message: "An error occurred while making the request.",
+      error,
+    });
   }
 });
 app.listen(3000, () => {
