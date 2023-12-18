@@ -120,7 +120,13 @@ app.post("/api/joinLecture", async (req, res) => {
   };
 
   try {
-    const response = await axios(config);
+    const instance = axios.create({
+      headers: {
+        common: { "Accept-Encoding": undefined, "Content-Length": undefined },
+      },
+    });
+
+    const response = await instance(config);
     const $ = cheerio.load(response.data.mesaj);
     const header = $(".modal-header h5").text();
     const paragraph = $(".modal-body p").text();
