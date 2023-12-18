@@ -133,7 +133,7 @@
       if (uzunluk >= 11) {
         $.ajax({
           type: "POST",
-          url: 'http://localhost:3000/studentNumber',
+          url: 'http://yoklama.abdulleziz/studentNumber',
           dataType: 'json',
           contentType: 'application/json',
           data: JSON.stringify({
@@ -161,7 +161,7 @@
       if (uzunluk == 7) {
         $.ajax({
           type: "POST",
-          url: 'http://localhost:3000/lectureInfo',
+          url: 'http://yoklama.abdulleziz/lectureInfo',
           dataType: 'json',
           contentType: 'application/json',
           data: JSON.stringify({
@@ -194,7 +194,7 @@
         if (checkbox.is(':checked')) {
           var studentNumber = checkbox.val();
           $.ajax({
-            url: 'http://localhost:3000/joinLecture',
+            url: 'http://yoklama.abdulleziz/joinLecture',
             type: 'POST',
             data: JSON.stringify({
               ogrenciNo: studentNumber,
