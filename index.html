@@ -69,12 +69,12 @@
                 for (let i = 0; i < students.length; i++) {
                   const student = students[i];
                   document.write(`
-                                        <div>
-                                            <input type="checkbox" id="${student.id}" name="${student.id}" value="${student.value}">
-                                            <label for="${student.id}">${student.label}</label>\                                   
-                                            <p hidden class="col-12 alert alert-warning" role="alert" id="responseFor${student.value}" />
-                                        </div>
-                                    `);
+                    <div>
+                      <input type="checkbox" id="${student.id}" name="${student.id}" value="${student.value}">
+                      <label for="${student.id}">${student.label}</label>\                                   
+                      <p hidden class="col-12 alert alert-warning" role="alert" id="responseFor${student.value}" />
+                    </div>
+                  `);
                 }
               </script>
             </div>
