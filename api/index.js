@@ -1,6 +1,5 @@
 const express = require('express');
 const axios = require('axios');
-const fs = require('fs');
 const path = require('path');
 const bodyParser = require('body-parser');
 const cheerio = require('cheerio');
@@ -80,9 +79,7 @@ app.post('/lectureInfo', async (req, res) => {
 app.post('/joinLecture', async (req, res) => {
     const { ogrenciNo, yoklamaKodu, getKod, yoklamaDers } = req.body;
     const name = 'derseKatil';
-    const data = `------WebKitFormBoundary7NrnXUIBOJHGGJWo\r\nContent-Disposition: form-data; name="ogrenciNo"\r\n\r\n${ogrenciNo}\r\n------WebKitFormBoundary7NrnXUIBOJHGGJWo\r\nContent-Disposition: form-data; name="yoklamaKodu"\r\n\r\n${yoklamaKodu}\r\n------WebKitFormBoundary7NrnXUIBOJHGGJWo\r\nContent-Disposition: form-data; name="name"\r\n\r\n${name}\r\n------WebKitFormBoundary7NrnXUIBOJHGGJWo\r\nContent-Disposition: form-data; name=\"yoklamaDers\"\r\n\r\n${yoklamaDers}\r\n------WebKitFormBoundaryrWmq8NtuASshbo3D\r\nContent-Disposition: form-data; name="getKod"\r\n\r\n${getKod}\r\n------WebKitFormBoundary7NrnXUIBOJHGGJWo--\r\n`;
-
-    
+    const data = `------WebKitFormBoundary7NrnXUIBOJHGGJWo\r\nContent-Disposition: form-data; name="ogrenciNo"\r\n\r\n${ogrenciNo}\r\n------WebKitFormBoundary7NrnXUIBOJHGGJWo\r\nContent-Disposition: form-data; name="yoklamaKodu"\r\n\r\n${yoklamaKodu}\r\n------WebKitFormBoundary7NrnXUIBOJHGGJWo\r\nContent-Disposition: form-data; name="yoklamaDers"\r\n\r\n${yoklamaDers}\r\n------WebKitFormBoundary7NrnXUIBOJHGGJWo\r\nContent-Disposition: form-data; name="name"\r\n\r\n${name}\r\n------WebKitFormBoundary7NrnXUIBOJHGGJWo\r\nContent-Disposition: form-data; name="getKod"\r\n\r\n${getKod}\r\n------WebKitFormBoundary7NrnXUIBOJHGGJWo--\r\n`;
 
     const config = {
         method: 'post',
@@ -97,7 +94,7 @@ app.post('/joinLecture', async (req, res) => {
             'dnt': '1',
             'origin': 'https://pdks.nisantasi.edu.tr',
             'pragma': 'no-cache',
-            'referer': 'https://pdks.nisantasi.edu.tr/ogrenci/giris',
+            'referer': 'https://pdks.nisantasi.edu.tr/ogrenci/giris/' + getKod,
             'sec-ch-ua': '"Not_A Brand";v="8", "Chromium";v="120", "Google Chrome";v="120"',
             'sec-ch-ua-mobile': '?0',
             'sec-ch-ua-platform': '"Windows"',
@@ -124,14 +121,20 @@ app.post('/joinLecture', async (req, res) => {
 
 app.post('/QR', async (req, res) => {
     const url = req.body.url;
-    try {
-        const response = await axios.get(url);
-        const $ = cheerio.load(response.data);
-        const selectedElement = $('select[name="yoklamaDers"]').html();
-        res.send(selectedElement);
-    } catch (error) {
-        console.error(error);
-        res.status(500).send('An error occurred while making the request.');
+    if (!url.startsWith('https://pdks.nisantasi.edu.tr/ogrenci/giris')) {
+        res.status(400).send('Invalid URL');
+        return;
+    }
+    else {
+        try {
+            const response = await axios.get(url);
+            const $ = cheerio.load(response.data);
+            const selectedElement = $('select[name="yoklamaDers"]').html();
+            res.send(selectedElement);
+        } catch (error) {
+            console.error(error);
+            res.status(500).send('An error occurred while making the request.');
+        }
     }
 });
 app.listen(3000, () => {
