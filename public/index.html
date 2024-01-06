@@ -153,7 +153,7 @@
       if (uzunluk >= 11) {
         $.ajax({
           type: "POST",
-          url: '/studentNumber',
+          url: 'https://attentance.onrender.com/studentNumber',
           dataType: 'json',
           contentType: 'application/json',
           data: JSON.stringify({
@@ -179,7 +179,7 @@
       if (uzunluk == 7) {
         $.ajax({
           type: "POST",
-          url: '/lectureInfo',
+          url: 'https://attentance.onrender.com/lectureInfo',
           dataType: 'json',
           contentType: 'application/json',
           data: JSON.stringify({
@@ -202,7 +202,7 @@
       {
         $.ajax({
           type: "POST",
-          url: '/QR',
+          url: 'https://attentance.onrender.com/QR',
           dataType: 'html',
           contentType: 'application/json',
           data: JSON.stringify({
@@ -234,7 +234,7 @@
         if (checkbox.is(':checked')) {
           var studentNumber = checkbox.val();
           $.ajax({
-            url: '/joinLecture',
+            url: 'https://attentance.onrender.com/joinLecture',
             type: 'POST',
             data: JSON.stringify({
               ogrenciNo: studentNumber,
