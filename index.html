@@ -261,6 +261,17 @@
       });
     });
   </script>
+    <script defer>
+      // Get the value from the query parameter
+      const defaultValue = new URLSearchParams(window.location.search).get('qrLink') || '';
+
+      // Set the default value to the input field
+      if (defaultValue) {
+        $(".qrLink").val(defaultValue);
+        toggleInput('yoklamaKodu', 'qrLink');
+        qrBilgiGetir(defaultValue);
+      }
+    </script>
 </body>
 
 </html>
