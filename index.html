@@ -1,277 +1,324 @@
 <html lang="tr">
+  <head>
+    <base href="https://pdks.nisantasi.edu.tr/" />
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Language" content="tr" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Abdülleziz Yoklama</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no"
+    />
 
-<head>
-  <base href="https://pdks.nisantasi.edu.tr/">
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta http-equiv="Content-Language" content="tr">
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <title>Abdülleziz Yoklama</title>
-  <meta name="viewport"
-    content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    />
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="assets/css/main.css?v=19" />
 
-  <link rel="stylesheet" href="assets/css/main.css?v=19">
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous"
+    ></script>
 
-  <script src="https://code.jquery.com/jquery-3.3.1.min.js"
-    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <style>
+      input[type="number"]::-webkit-inner-spin-button,
+      input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        appearance: none;
+        margin: 0;
+      }
+    </style>
+  </head>
 
-  <style>
-    input[type="number"]::-webkit-inner-spin-button,
-    input[type="number"]::-webkit-outer-spin-button {
-      -webkit-appearance: none;
-      appearance: none;
-      margin: 0;
-    }
-  </style>
-</head>
+  <body class="bg-light p-4">
+    <div
+      class="d-none loader d-flex align-items-center justify-content-center position-fixed w-100 h-100"
+      style="top: 0; left: 0; z-index: 66"
+    ></div>
+    <div
+      class="d-none loader"
+      style="
+        background: #0000009c;
+        border: none;
+        margin: 0px;
+        padding: 0px;
+        width: 100%;
+        height: 100%;
+        top: 0px;
+        left: 0px;
+        position: fixed;
+        z-index: 2;
+      "
+    ></div>
 
-<body class="bg-light p-4">
-  <div class="d-none loader d-flex align-items-center justify-content-center position-fixed w-100 h-100"
-    style="top:0; left:0; z-index:66">
-  </div>
-  <div class="d-none loader"
-    style="background:#0000009c; border:none; margin:0px; padding:0px; width:100%; height:100%; top:0px; left:0px; position:fixed; z-index:2">
-  </div>
+    <div class="responseDiv"></div>
 
-  <div class="responseDiv"></div>
+    <form id="derseKatilForm" class="mb-4">
+      <div class="row g-0">
+        <div class="col-lg-5 m-auto">
+          <div class="card shadow p-4">
+            <div class="row">
+              <div class="col-12 text-center">
+                <p class="h1 mt-4">Abdülleziz Corp.</p>
+                <p class="h5 opacity-75 mt-4">Yoklama Kontrol Sistemi</p>
+                <p class="h6 opacity-50">Öğrenci Girişi</p>
+              </div>
 
-  <form id="derseKatilForm" class="mb-4">
-    <div class="row g-0">
-      <div class="col-lg-5 m-auto">
-        <div class="card shadow p-4">
-          <div class="row">
-            <div class="col-12 text-center">
-              <p class="h1 mt-4">Abdülleziz Corp.</p>
-              <p class="h5 opacity-75 mt-4">Yoklama Kontrol Sistemi</p>
-              <p class="h6 opacity-50">Öğrenci Girişi</p>
-            </div>
+              <div class="col-12 mt-4">
+                <label class="fw-semibold">Öğrenci Seçme</label>
+                <script>
+                  const students = [
+                    { id: "student1", value: "20212022067", label: "Barkın" },
+                    {
+                      id: "student2",
+                      value: "20212022072",
+                      label: "Ali Kerem Karaduman",
+                    },
+                    { id: "student3", value: "20212022089", label: "Kaan" },
+                    { id: "student4", value: "20212022021", label: "Yağız" },
+                    { id: "student5", value: "20212022071", label: "Yusuf" },
+                    { id: "student6", value: "20202022025", label: "Bora" },
+                    { id: "student7", value: "20202022035", label: "Buğra" },
+                    { id: "student8", value: "20202022027", label: "Baran" },
+                    { id: "student9", value: "20232022062", label: "Ulaştı" },
+                    { id: "student10", value: "20212022092", label: "İlker" },
+                    { id: "student11", value: "20202022008", label: "Taha" },
+                  ];
 
-            <div class="col-12 mt-4">
-              <label class="fw-semibold">Öğrenci Seçme</label>
-              <script>
-                const students = [
-                  { id: "student1", value: "20212022067", label: "Barkın" },
-                  { id: "student2", value: "20212022072", label: "Ali Kerem Karaduman" },
-                  { id: "student3", value: "20212022089", label: "Kaan" },
-                  { id: "student4", value: "20212022021", label: "Yağız" },
-                  { id: "student5", value: "20212022071", label: "Yusuf" },
-                  { id: "student6", value: "20202022025", label: "Bora" },
-                  { id: "student7", value: "20202022035", label: "Buğra" },
-                  { id: "student8", value: "20202022027", label: "Baran" },
-                  { id: "student9", value: "20232022062", label: "Ulaştı" },
-                  { id: "student10", value: "20212022092", label: "İlker" },
-                  { id: "student11", value: "20202022008", label: "Taha" },
-                ];
-
-                for (let i = 0; i < students.length; i++) {
-                  const student = students[i];
-                  document.write(`
+                  for (let i = 0; i < students.length; i++) {
+                    const student = students[i];
+                    document.write(`
                     <div>
                       <input type="checkbox" id="${student.id}" name="${student.id}" value="${student.value}">
                       <label for="${student.id}">${student.label}</label>\                                   
                       <p hidden class="col-12 alert alert-warning" role="alert" id="responseFor${student.value}" />
                     </div>
                 `);
-                }
-              </script>
-            </div>
-            <div class="col-12 mt-4">
-              <label class="fw-semibold">Ders Aktivasyon Kodu</label>
-              <input id="yoklamaKodu" class="form-control yoklamaKodu" type="text" name="yoklamaKodu"
-                placeholder="_ _ _ _ _ _ _" oninput="dersBilgiGetir(this.value); toggleInput('yoklamaKodu', 'qrLink');">
-            </div>
-            <div class="col-12 mt-4">
-              <label class="fw-semibold">Ders QR Link</label>
-              <input id="qrLink" class="form-control qrLink" type="text" name="qrLink" placeholder=""
-                oninput="toggleInput('yoklamaKodu', 'qrLink'); qrBilgiGetir(this.value);">
-            </div>
-            <div id="dersBilgi" class="col-12 mt-3 dersBilgi">
-              <label class="fw-semibold">Ders</label>
+                  }
+                </script>
+              </div>
+              <div class="col-12 mt-4">
+                <label class="fw-semibold">Ders Aktivasyon Kodu</label>
+                <input
+                  id="yoklamaKodu"
+                  class="form-control yoklamaKodu"
+                  type="text"
+                  name="yoklamaKodu"
+                  placeholder="_ _ _ _ _ _ _"
+                  oninput="dersBilgiGetir(this.value); toggleInput('yoklamaKodu', 'qrLink');"
+                />
+              </div>
+              <div class="col-12 mt-4">
+                <label class="fw-semibold">Ders QR Link</label>
+                <input
+                  id="qrLink"
+                  class="form-control qrLink"
+                  type="text"
+                  name="qrLink"
+                  placeholder=""
+                  oninput="toggleInput('yoklamaKodu', 'qrLink'); qrBilgiGetir(this.value);"
+                />
+              </div>
+              <div id="dersBilgi" class="col-12 mt-3 dersBilgi">
+                <label class="fw-semibold">Ders</label>
 
-              <select id="yoklamaSelection" class="form-control" name="yoklamaDers">
-                <option value="">Seçiniz...</option>
-              </select>
-            </div>
+                <select
+                  id="yoklamaSelection"
+                  class="form-control"
+                  name="yoklamaDers"
+                >
+                  <option value="">Seçiniz...</option>
+                </select>
+              </div>
 
-            <div class="col-12 mt-4 text-center">
-              <button type="submit" class="btn btn-success-2  fw-semibold"><i class="bi bi-clock-history me-2"></i>
-                DERSE KATIL</button>
+              <div class="col-12 mt-4 text-center">
+                <button type="submit" class="btn btn-success-2 fw-semibold">
+                  <i class="bi bi-clock-history me-2"></i> DERSE KATIL
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </form>
+    </form>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-    crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/jquery.inputmask.min.js"
-    integrity="sha512-efAcjYoYT0sXxQRtxGY37CKYmqsFVOIwMApaEbrxJr4RwqVVGw8o+Lfh/+59TU07+suZn1BWq4fDl5fdgyCNkw=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/jquery.inputmask.min.js"
+      integrity="sha512-efAcjYoYT0sXxQRtxGY37CKYmqsFVOIwMApaEbrxJr4RwqVVGw8o+Lfh/+59TU07+suZn1BWq4fDl5fdgyCNkw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
 
-  <script>
-    $(".ogrenciNo").inputmask("9 9 9 9 9 9 9 9 9 9 9 9");
-    $(".yoklamaKodu").inputmask("9 9 9 9 9 9 9");
+    <script>
+      $(".ogrenciNo").inputmask("9 9 9 9 9 9 9 9 9 9 9 9");
+      $(".yoklamaKodu").inputmask("9 9 9 9 9 9 9");
 
-    function debounce(func, wait) {
-      let timeout;
-      return function executedFunction(...args) {
-        const later = () => {
+      function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+          const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+          };
           clearTimeout(timeout);
-          func(...args);
+          timeout = setTimeout(later, wait);
         };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-      };
-    };
-
-    function toggleInput(input1Id, input2Id) {
-      const input1 = document.getElementById(input1Id);
-      const input2 = document.getElementById(input2Id);
-
-      if (input1.value) {
-        input2.disabled = true;
-      } else {
-        input2.disabled = false;
       }
 
-      if (input2.value) {
-        input1.disabled = true;
-      } else {
-        input1.disabled = false;
+      function toggleInput(input1Id, input2Id) {
+        const input1 = document.getElementById(input1Id);
+        const input2 = document.getElementById(input2Id);
+
+        if (input1.value) {
+          input2.disabled = true;
+        } else {
+          input2.disabled = false;
+        }
+
+        if (input2.value) {
+          input1.disabled = true;
+        } else {
+          input1.disabled = false;
+        }
       }
-    }
 
-    const ogrenciBilgiGetir = debounce(function (ogrenciNo) {
-      const uzunluk = ogrenciNo.replace(/[_\s]/g, '').length;
+      const ogrenciBilgiGetir = debounce(function (ogrenciNo) {
+        const uzunluk = ogrenciNo.replace(/[_\s]/g, "").length;
 
-      if (uzunluk >= 11) {
-        $.ajax({
-          type: "POST",
-          url: 'https://ilker.abdulleziz.com/studentNumber',
-          dataType: 'json',
-          contentType: 'application/json',
-          data: JSON.stringify({
-            name: "ogrenciBilgiGetir",
-            ogrenciNo: ogrenciNo
-          }),
-          beforeSend: function (response) {
-          },
-          success: function (response) {
-            $(".ogrenciBilgi").empty();
-            if (response.icerik) {
-              $(".ogrenciBilgi").append(response.icerik);
-            }
-
-          }
-        });
-      }
-    }, 1000);
-
-    const dersBilgiGetir = debounce((yoklamaKodu) => {
-      const uzunluk = yoklamaKodu.replace(/[_\s]/g, '').length;
-
-      if (uzunluk == 7) {
-        $.ajax({
-          type: "POST",
-          url: 'https://ilker.abdulleziz.com/lectureInfo',
-          dataType: 'json',
-          contentType: 'application/json',
-          data: JSON.stringify({
-            name: "dersBilgiGetir",
-            yoklamaKodu: yoklamaKodu
-          }),
-          beforeSend: function (response) {
-          },
-          success: function (response) {
-            $(".dersBilgi").empty();
-            if (response.icerik) {
-              $(".dersBilgi").append(response.icerik);
-            }
-          }
-        });
-      }
-    }, 1000);
-
-    const qrBilgiGetir = debounce((qrLink) => {
-      {
-        $.ajax({
-          type: "POST",
-          url: 'https://ilker.abdulleziz.com/QR',
-          dataType: 'html',
-          contentType: 'application/json',
-          data: JSON.stringify({
-            url: $(".qrLink").val(),
-          }),
-          beforeSend: function (response) {
-
-          },
-          success: function (response) {
-            let selectBox = $('#yoklamaSelection');
-            selectBox.empty();
-            selectBox.append(response);
-          },
-          error: function (error) {
-            console.error(error);
-          }
-        });
-      }
-    }, 1000);
-
-    $("#derseKatilForm").submit(function (e) {
-      e.preventDefault();
-
-      var checkboxes = $('input[type=checkbox]');
-
-      checkboxes.each(function () {
-        var checkbox = $(this);
-        console.log($(".yoklamaDers:selected").val());
-        if (checkbox.is(':checked')) {
-          var studentNumber = checkbox.val();
+        if (uzunluk >= 11) {
           $.ajax({
-            url: 'https://ilker.abdulleziz.com/joinLecture',
-            type: 'POST',
+            type: "POST",
+            url: "https://ilker.abdulleziz.com/studentNumber",
+            dataType: "json",
+            contentType: "application/json",
             data: JSON.stringify({
-              ogrenciNo: studentNumber,
-              yoklamaKodu: $(".yoklamaKodu").val(),
-              yoklamaDers: $("#yoklamaSelection").val(),
-              getKod: $(".qrLink").val().substring($(".qrLink").val().lastIndexOf('/') + 1)
+              ogrenciNo: ogrenciNo,
             }),
-            contentType: 'application/json', // Add this line
+            beforeSend: function (response) {},
             success: function (response) {
-              $('#responseFor' + studentNumber).text(JSON.stringify(response.header + ' ' + response.paragraph));
-              $('#responseFor' + studentNumber).removeAttr("hidden");
-              console.log(response);
+              $(".ogrenciBilgi").empty();
+              if (response.icerik) {
+                $(".ogrenciBilgi").append(response.icerik);
+              }
             },
-            error: function (error) {
-              // handle error
-              console.log(error);
-            }
           });
         }
-        else {
-          var studentNumber = checkbox.val();
-          $('#responseFor' + studentNumber).attr("hidden", true);
+      }, 1000);
+
+      const dersBilgiGetir = debounce((yoklamaKodu) => {
+        const uzunluk = yoklamaKodu.replace(/[_\s]/g, "").length;
+
+        if (uzunluk == 7) {
+          $.ajax({
+            type: "POST",
+            url: "https://ilker.abdulleziz.com/lectureInfo",
+            dataType: "json",
+            contentType: "application/json",
+            data: JSON.stringify({
+              name: "dersBilgiGetir",
+              yoklamaKodu: yoklamaKodu,
+            }),
+            beforeSend: function (response) {},
+            success: function (response) {
+              $(".dersBilgi").empty();
+              if (response.icerik) {
+                $(".dersBilgi").append(response.icerik);
+              }
+            },
+          });
         }
+      }, 1000);
+
+      const qrBilgiGetir = debounce((qrLink) => {
+        {
+          $.ajax({
+            type: "POST",
+            url: "https://ilker.abdulleziz.com/QR",
+            dataType: "html",
+            contentType: "application/json",
+            data: JSON.stringify({
+              url: $(".qrLink").val(),
+            }),
+            beforeSend: function (response) {},
+            success: function (response) {
+              let selectBox = $("#yoklamaSelection");
+              selectBox.empty();
+              selectBox.append(response);
+            },
+            error: function (error) {
+              console.error(error);
+            },
+          });
+        }
+      }, 1000);
+
+      $("#derseKatilForm").submit(function (e) {
+        e.preventDefault();
+
+        var checkboxes = $("input[type=checkbox]");
+
+        checkboxes.each(function () {
+          var checkbox = $(this);
+          console.log($(".yoklamaDers:selected").val());
+          if (checkbox.is(":checked")) {
+            var studentNumber = checkbox.val();
+            $.ajax({
+              url: "https://ilker.abdulleziz.com/joinLecture",
+              type: "POST",
+              data: JSON.stringify({
+                ogrenciNo: studentNumber,
+                yoklamaKodu: $(".yoklamaKodu").val(),
+                yoklamaDers: $("#yoklamaSelection").val(),
+                getKod: $(".qrLink")
+                  .val()
+                  .substring($(".qrLink").val().lastIndexOf("/") + 1),
+              }),
+              contentType: "application/json", // Add this line
+              success: function (response) {
+                $("#responseFor" + studentNumber).text(
+                  JSON.stringify(response.header + " " + response.paragraph)
+                );
+                $("#responseFor" + studentNumber).removeAttr("hidden");
+                console.log(response);
+              },
+              error: function (error) {
+                // handle error
+                console.log(error);
+              },
+            });
+          } else {
+            var studentNumber = checkbox.val();
+            $("#responseFor" + studentNumber).attr("hidden", true);
+          }
+        });
       });
-    });
-  </script>
+    </script>
     <script defer>
       // Get the value from the query parameter
-      const defaultValue = new URLSearchParams(window.location.search).get('qrLink') || '';
+      const defaultValue =
+        new URLSearchParams(window.location.search).get("qrLink") || "";
 
       // Set the default value to the input field
       if (defaultValue) {
         $(".qrLink").val(defaultValue);
-        toggleInput('yoklamaKodu', 'qrLink');
+        toggleInput("yoklamaKodu", "qrLink");
         qrBilgiGetir(defaultValue);
       }
     </script>
-</body>
-
+  </body>
 </html>
