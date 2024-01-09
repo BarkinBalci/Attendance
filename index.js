@@ -86,11 +86,25 @@ app.post("/lectureInfo", async (req, res) => {
         lessonCode: option.text().split("/")[0].trim(),
       };
     });
-    if (options.length === 0) {
+    res.json([
+      {
+        lessonName:
+          "Mühendislik Mimarlık Fakültesi - Yazılım Mühendisliği (İngilizce) - ESOF319 - Artificial Intelligence",
+        lessonId: "3635",
+        lessonCode: " ESOF319 ",
+      },
+      {
+        lessonName:
+          "Mühendislik Mimarlık Fakültesi - Yazılım Mühendisliği (İngilizce) - ESOF315 - Database Management Systems",
+        lessonId: "5846",
+        lessonCode: " ESOF315 ",
+      },
+    ]);
+    /* if (options.length === 0) {
       res.status(500).send("An error occurred while making the request.");
     } else {
       res.json(options);
-    }
+    } */
   } catch (error) {
     console.error(error);
     res.status(500).send("An error occurred while making the request.");
@@ -164,6 +178,58 @@ app.post("/QR", async (req, res) => {
     });
     if (options.length === 0) {
       res.status(500).send("An error occurred while making the request.");
+    } else {
+      res.json(options);
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("An error occurred while making the request.");
+  }
+});
+app.post("/getStudentLessons", async (req, res) => {
+  const studentNo = req.body.studentNo.trim();
+
+  const config = {
+    headers: {
+      accept: "application/json, text/javascript, */*; q=0.01",
+      "accept-language": "tr-TR,tr;q=0.9,en-US;q=0.8,en;q=0.7",
+      "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+      "sec-ch-ua": '"Not_A Brand";v="8", "Chromium";v="120", "Opera";v="106"',
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": '"Windows"',
+      "sec-fetch-dest": "empty",
+      "sec-fetch-mode": "cors",
+      "sec-fetch-site": "same-origin",
+      "x-requested-with": "XMLHttpRequest",
+    },
+    referrer: "https://pdks.nisantasi.edu.tr/ogrenci/devam-devamsizlik",
+    referrerPolicy: "strict-origin-when-cross-origin",
+    method: "POST",
+    mode: "cors",
+    credentials: "include",
+    url: "https://pdks.nisantasi.edu.tr/ogrenci/devam-devamsizlik-islem",
+    data: `name=ogrenciBilgiGetir&ogrenciNo=${studentNo}`,
+  };
+  try {
+    const response = await axios(config);
+    const $ = cheerio.load(response.data.icerik);
+
+    const options = [];
+    $("option").each(function (i, elem) {
+      const option = $(this);
+      options[i] = {
+        lessonName: option.text(),
+        lessonId: option.val(),
+        lessonCode: option.text().split("-")[2],
+      };
+    });
+    options.map((option, index) => {
+      if (option.lessonId == "") {
+        options.splice(index, 1);
+      }
+    });
+    if (options.length === 0) {
+      res.status(500).send("Not enough lessons");
     } else {
       res.json(options);
     }
