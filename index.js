@@ -86,25 +86,11 @@ app.post("/lectureInfo", async (req, res) => {
         lessonCode: option.text().split("/")[0].trim(),
       };
     });
-    res.json([
-      {
-        lessonName:
-          "Mühendislik Mimarlık Fakültesi - Yazılım Mühendisliği (İngilizce) - ESOF319 - Artificial Intelligence",
-        lessonId: "3635",
-        lessonCode: " ESOF319 ",
-      },
-      {
-        lessonName:
-          "Mühendislik Mimarlık Fakültesi - Yazılım Mühendisliği (İngilizce) - ESOF315 - Database Management Systems",
-        lessonId: "5846",
-        lessonCode: " ESOF315 ",
-      },
-    ]);
-    /* if (options.length === 0) {
+    if (options.length === 0) {
       res.status(500).send("An error occurred while making the request.");
     } else {
       res.json(options);
-    } */
+    }
   } catch (error) {
     console.error(error);
     res.status(500).send("An error occurred while making the request.");
@@ -167,9 +153,6 @@ app.post("/QR", async (req, res) => {
     const options = [];
     $("option").each(function (i, elem) {
       const option = $(this);
-      if (option.val().length === 0) {
-        return;
-      }
       options[i] = {
         lessonName: option.text(),
         lessonId: option.val(),
